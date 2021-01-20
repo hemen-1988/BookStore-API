@@ -1,0 +1,6 @@
+2021-01-17 06:54:26.9811 INFO Accessed Home Controller
+2021-01-17 06:56:58.8358 DEBUG Got A Value
+2021-01-17 06:57:12.6060 DEBUG Got A Value
+2021-01-17 06:58:34.8610 INFO This is an error
+2021-01-17 06:59:25.2566 WARN This is a warning
+2021-01-17 06:59:45.2179 INFO Accessed Home Controller
