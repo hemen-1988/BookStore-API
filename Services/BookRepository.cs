@@ -1,5 +1,6 @@
 ﻿using BookStore_API.Contracts;
 using BookStore_API.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,39 +16,46 @@ namespace BookStore_API.Services
         {
             _db = db;
         }
-        public Task<bool> Create(Book entity)
+        public async Task<bool> Create(Book entity)
         {
-            throw new NotImplementedException();
+            await _db.Books.AddAsync(entity);
+            return await Save();
         }
 
-        public Task<bool> Delete(Book entity)
+        public async Task<bool> Delete(Book entity)
         {
-            throw new NotImplementedException();
+            _db.Books.Remove(entity);
+            return await Save();
         }
 
-        public Task<IList<Book>> FindAll()
+        public async Task<IList<Book>> FindAll()
         {
-            throw new NotImplementedException();
+            var books = await _db.Books.ToListAsync();
+            return books;
         }
 
-        public Task<Book> FindById(int Id)
+        public async Task<Book> FindById(int id)
         {
-            throw new NotImplementedException();
+            var books = await _db.Books.FindAsync(id);
+            return books;
         }
 
-        public Task<bool> isExists(int id)
+        public async Task<bool> isExists(int id)
         {
-            throw new NotImplementedException();
+            var isExists =  await _db.Books.AnyAsync(q => q.Id == id);
+            return isExists;
         }
 
-        public Task<bool> Save()
+        public async Task<bool> Save()
         {
-            throw new NotImplementedException();
+            var changes = await _db.SaveChangesAsync();
+            return changes > 0;
         }
 
-        public Task<bool> Update(Book entity)
+        public async Task<bool> Update(Book entity)
         {
-            throw new NotImplementedException();
+            _db.Books.Update(entity);
+            return await Save();
         }
     }
 }
